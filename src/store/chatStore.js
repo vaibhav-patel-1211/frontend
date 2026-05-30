@@ -215,7 +215,7 @@ export const useChatStore = create((set, get) => ({
           const msgs = [...(chat.messages || [])];
           const lastIdx = msgs.length - 1;
           if (msgs[lastIdx] && msgs[lastIdx].id === assistantMsgId) {
-            msgs[lastIdx] = { ...msgs[lastIdx], imageUrl: data.image_url };
+            msgs[lastIdx] = { ...msgs[lastIdx], imageUrl: data.image_url?.startsWith('/') ? `${API_BASE}${data.image_url}` : data.image_url };
           }
           return { chats: s.chats.map((c) => (c.id === chatId ? { ...c, messages: msgs } : c)) };
         });
@@ -282,7 +282,8 @@ export const useChatStore = create((set, get) => ({
         const last = msgs[msgs.length - 1];
         if (last && last.isGeneratingImage) {
           if (res.ok) {
-            msgs[msgs.length - 1] = { ...last, isGeneratingImage: false, imageUrl: data.image_url, content: `Generated artwork for: "${prompt}"` };
+            const imgUrl = data.image_url?.startsWith('/') ? `${API_BASE}${data.image_url}` : data.image_url;
+            msgs[msgs.length - 1] = { ...last, isGeneratingImage: false, imageUrl: imgUrl, content: `Generated artwork for: "${prompt}"` };
           } else {
             msgs[msgs.length - 1] = { ...last, isGeneratingImage: false, content: `Error: ${data.detail || 'Image generation failed'}` };
           }
