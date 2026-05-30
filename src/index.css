@@ -1,0 +1,208 @@
+@import "tailwindcss";
+
+@theme {
+  --color-accent-violet: #8b5cf6;
+  --color-accent-violet-dark: #7c3aed;
+  
+  --animate-cursor-blink: cursor-blink 1.2s step-end infinite;
+  --animate-pulse-slow: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-shimmer: shimmer 2s infinite linear;
+
+  @keyframes cursor-blink {
+    from, to { border-color: transparent }
+    50% { border-color: #a3a3a3 }
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+}
+
+/* Custom Scrollbar Styles (Sleek, Linear-like) */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Base resets - Always Dark Mode */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #09090b;
+  color: #e5e5e5;
+  overflow: hidden;
+}
+
+/* Custom selection highlight - High contrast dark minimal */
+::selection {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+/* Minimalist Dark Panels */
+.glass-panel {
+  background: rgba(14, 14, 17, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.035);
+}
+
+.glass-input {
+  background: rgba(20, 20, 25, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Editorial Style Markdown Content */
+.markdown-content {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  letter-spacing: -0.005em;
+  color: #d4d4d8; /* zinc-300 */
+}
+
+.markdown-content h1 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+  color: #f4f4f5; /* zinc-100 */
+  letter-spacing: -0.02em;
+}
+
+.markdown-content h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #f4f4f5;
+  letter-spacing: -0.015em;
+}
+
+.markdown-content h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 1.25rem;
+  margin-bottom: 0.4rem;
+  color: #e4e4e7;
+}
+
+.markdown-content p {
+  margin-top: 0;
+  margin-bottom: 0.95rem;
+}
+
+.markdown-content blockquote {
+  border-left: 2px solid #52525b; /* zinc-600 */
+  padding-left: 1.15rem;
+  font-style: italic;
+  color: #a1a1aa; /* zinc-400 */
+  margin: 1.25rem 0;
+}
+
+.markdown-content ul {
+  list-style-type: square;
+  padding-left: 1.25rem;
+  margin-bottom: 0.95rem;
+  color: #d4d4d8;
+}
+
+.markdown-content ol {
+  list-style-type: decimal;
+  padding-left: 1.25rem;
+  margin-bottom: 0.95rem;
+  color: #d4d4d8;
+}
+
+.markdown-content li {
+  margin-bottom: 0.35rem;
+}
+
+.markdown-content code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.85em;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 0.15em 0.35em;
+  border-radius: 3px;
+  color: #e4e4e7;
+  border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.markdown-content pre {
+  margin-top: 0.85rem;
+  margin-bottom: 1.25rem;
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 8px;
+  background-color: #0b0b0d;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.markdown-content pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  color: #e4e4e7;
+  font-size: 0.85rem;
+  border: none;
+}
+
+.markdown-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+.markdown-content th {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.6rem 0.85rem;
+  font-weight: 550;
+  color: #a1a1aa;
+}
+
+.markdown-content td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 0.6rem 0.85rem;
+  color: #d4d4d8;
+}
+
+.markdown-content tr:hover td {
+  background-color: rgba(255, 255, 255, 0.01);
+}
+
+/* Typing Cursor Effect */
+.typing-cursor {
+  display: inline-block;
+  width: 6px;
+  height: 14px;
+  background-color: #a1a1aa;
+  margin-left: 4px;
+  vertical-align: baseline;
+  animation: cursor-blink 1.2s step-end infinite;
+}
+
+/* Monochromatic Skeleton Animation */
+.shimmer-bg {
+  background: linear-gradient(90deg, #18181b 25%, #27272a 50%, #18181b 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
