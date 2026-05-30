@@ -7,18 +7,21 @@ const API_BASE = import.meta.env.VITE_API_URL || 'https://backend-6qyx.onrender.
 const WS_BASE = API_BASE.replace(/^http/, 'ws');
 
 function getWs() {
-  if (!ws || ws.readyState === WebSocket.CLOSED || ws.readyState === WebSocket.CLOSING) {
-    ws = new WebSocket(`${WS_BASE}/ws/chat`);
-    ws.onmessage = (e) => {
-      if (messageHandler) messageHandler(JSON.parse(e.data));
-    };
-    ws.onerror = () => ws.close();
+  if (ws && (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING)) {
+    return ws;
   }
+  ws = new WebSocket(`${WS_BASE}/ws/chat`);
+  ws.onmessage = (e) => {
+    if (messageHandler) messageHandler(JSON.parse(e.data));
+  };
+  ws.onclose = () => { ws = null; };
+  ws.onerror = () => { ws = null; };
   return ws;
 }
 
 function waitForOpen(socket) {
   if (socket.readyState === WebSocket.OPEN) return Promise.resolve();
+  if (socket.readyState !== WebSocket.CONNECTING) return Promise.reject(new Error('WebSocket closed'));
   return new Promise((resolve, reject) => {
     socket.addEventListener('open', resolve, { once: true });
     socket.addEventListener('error', reject, { once: true });

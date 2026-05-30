@@ -316,8 +316,12 @@ export default function MessageBubble({ message }) {
               ) : (
                 <>
                   <div className="markdown-content text-neutral-300">
-                    {parseMarkdown(displayContent)}
-                    {isStreaming && <span className="typing-cursor" />}
+                    {streamingContent !== null ? (
+                      <span style={{ whiteSpace: 'pre-wrap' }}>{displayContent}<span className="typing-cursor" /></span>
+                    ) : (
+                      parseMarkdown(displayContent)
+                    )}
+                    {isStreaming && streamingContent === null && <span className="typing-cursor" />}
                   </div>
                   {!isStreaming && citations && citations.length > 0 && (
                     <div className="mt-3 pt-2 border-t border-neutral-800/50">
