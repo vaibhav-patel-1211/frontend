@@ -206,3 +206,10 @@ html, body, #root {
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
+
+
+/* Dark select dropdown for Windows */
+select option {
+  background-color: #0e0e11;
+  color: #d4d4d8;
+}

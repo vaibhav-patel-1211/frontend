@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Send, X, CornerDownLeft, Image as ImageIcon } from 'lucide-react';
+import { Send, X, CornerDownLeft, Image as ImageIcon, ChevronDown } from 'lucide-react';
 import { useChatStore } from '../store/chatStore';
 import StopButton from './StopButton';
 
@@ -91,16 +91,19 @@ export default function ChatInput() {
               </button>
 
               {/* Denomination selector */}
-              <select
-                value={denomination}
-                onChange={(e) => setDenomination(e.target.value)}
-                className="text-[11px] font-mono bg-transparent border border-neutral-800 rounded px-2 py-1.5 text-neutral-400 hover:text-neutral-200 focus:outline-none cursor-pointer appearance-none"
-                title="Select denomination"
-              >
-                <option value="Protestant">Protestant</option>
-                <option value="Catholic">Catholic</option>
-                <option value="Orthodox">Orthodox</option>
-              </select>
+              <div className="relative">
+                <select
+                  value={denomination}
+                  onChange={(e) => setDenomination(e.target.value)}
+                  className="text-[11px] font-mono bg-[#0e0e11] border border-neutral-800 rounded-md pl-2 pr-6 py-1.5 text-neutral-400 hover:text-neutral-200 hover:border-neutral-700 focus:outline-none focus:border-neutral-600 cursor-pointer appearance-none transition-colors"
+                  title="Select denomination"
+                >
+                  <option value="Protestant" className="bg-[#0e0e11] text-neutral-300">Protestant</option>
+                  <option value="Catholic" className="bg-[#0e0e11] text-neutral-300">Catholic</option>
+                  <option value="Orthodox" className="bg-[#0e0e11] text-neutral-300">Orthodox</option>
+                </select>
+                <ChevronDown className="w-3 h-3 absolute right-1.5 top-1/2 -translate-y-1/2 text-neutral-600 pointer-events-none" />
+              </div>
 
               {/* Clear Input */}
               {text.length > 0 && (
