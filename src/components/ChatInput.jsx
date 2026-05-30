@@ -8,7 +8,9 @@ export default function ChatInput() {
     sendMessage, 
     isGenerating, 
     isImageMode, 
-    setIsImageMode 
+    setIsImageMode,
+    denomination,
+    setDenomination
   } = useChatStore();
 
   const [text, setText] = useState('');
@@ -87,6 +89,18 @@ export default function ChatInput() {
               >
                 <ImageIcon className="w-3.5 h-3.5" />
               </button>
+
+              {/* Denomination selector */}
+              <select
+                value={denomination}
+                onChange={(e) => setDenomination(e.target.value)}
+                className="text-[11px] font-mono bg-transparent border border-neutral-800 rounded px-2 py-1.5 text-neutral-400 hover:text-neutral-200 focus:outline-none cursor-pointer appearance-none"
+                title="Select denomination"
+              >
+                <option value="Protestant">Protestant</option>
+                <option value="Catholic">Catholic</option>
+                <option value="Orthodox">Orthodox</option>
+              </select>
 
               {/* Clear Input */}
               {text.length > 0 && (

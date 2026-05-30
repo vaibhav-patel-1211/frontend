@@ -36,6 +36,7 @@ export const useChatStore = create((set, get) => ({
   searchQuery: '',
   isGenerating: false,
   isImageMode: false,
+  denomination: 'Protestant',
 
   // Flat streaming state — updated on every token for fast re-renders
   streamingMessageId: null,
@@ -45,6 +46,7 @@ export const useChatStore = create((set, get) => ({
   setSidebarOpen: (v) => set({ isSidebarOpen: v }),
   setSearchQuery: (v) => set({ searchQuery: v }),
   setIsImageMode: (v) => set({ isImageMode: v }),
+  setDenomination: (v) => set({ denomination: v }),
 
   loadChats: async () => {
     try {
@@ -245,7 +247,7 @@ export const useChatStore = create((set, get) => ({
     try {
       const socket = getWs();
       await waitForOpen(socket);
-      socket.send(JSON.stringify({ chat_id: chatId, message: text }));
+      socket.send(JSON.stringify({ chat_id: chatId, message: text, denomination: get().denomination }));
     } catch (e) {
       console.error('WebSocket error', e);
       messageHandler = null;
